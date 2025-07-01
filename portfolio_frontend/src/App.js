@@ -3,43 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
-
-// Placeholder page components
-function Home() {
-  return (
-    <section className="content">
-      <h1 className="title">Welcome to My Portfolio</h1>
-      <p className="subtitle">A modern, minimal software developer portfolio site.</p>
-    </section>
-  );
-}
-
-function Projects() {
-  return (
-    <section className="content">
-      <h2 className="title">Projects</h2>
-      <p>Explore my coding projects and case studies here. (Content coming soon!)</p>
-    </section>
-  );
-}
-
-function Resume() {
-  return (
-    <section className="content">
-      <h2 className="title">Resume</h2>
-      <p>Download or view my resume and work experience. (Content coming soon!)</p>
-    </section>
-  );
-}
-
-function Contact() {
-  return (
-    <section className="content">
-      <h2 className="title">Contact</h2>
-      <p>Let's connect! (Content and contact form coming soon.)</p>
-    </section>
-  );
-}
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Resume from './pages/Resume';
+import Contact from './pages/Contact';
 
 // PUBLIC_INTERFACE
 function App() {
