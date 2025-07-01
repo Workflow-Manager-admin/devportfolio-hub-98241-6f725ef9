@@ -20,6 +20,10 @@
   --text-secondary: var(--primary);
   --button-bg: var(--primary);
   --button-text: #fff;
+  /* Prevent body from exceeding viewport width */
+  width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 [data-theme="dark"] {
   --bg-primary: #1a1a1a;
@@ -39,6 +43,10 @@ body, html {
   font-family: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
   font-size: 16px;
   scroll-behavior: smooth;
+  width: 100vw;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .App {
@@ -48,11 +56,17 @@ body, html {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .main-content {
   flex: 1 0 auto;
   padding-bottom: 2.5rem;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* ---- TYPOGRAPHY ---- */
@@ -285,6 +299,9 @@ a:focus {
   background: none;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative;
 }
 @media (max-width:640px) {
   .content {
@@ -313,6 +330,10 @@ a:focus {
   flex-wrap: wrap;
   gap: 2.2rem;
   justify-content: center;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* ---- PROJECT CARD ---- */
@@ -322,13 +343,15 @@ a:focus {
   box-shadow: 0 2px 18px 0 rgba(0,0,0,0.04);
   border-radius: 9px;
   padding: 2rem 1.4rem;
-  min-width: 260px;
+  width: 100%;
   max-width: 350px;
   flex: 1 0 260px;
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 .project-card .project-title {
   font-weight: 700;
@@ -459,8 +482,11 @@ a:focus {
   }
   .project-card {
     padding: 1.2rem 0.7rem;
-    min-width: 90vw;
-    max-width: 97vw;
+    width: 97vw !important;
+    max-width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .resume-section {
     margin-bottom: 1.3rem;
