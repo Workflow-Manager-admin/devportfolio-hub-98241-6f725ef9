@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+// import { sendContact } from '../api/api';
 
 /**
  * PUBLIC_INTERFACE
  * Contact page with contact info and message form placeholder.
+ * 
+ * (When form is implemented, will submit via sendContact from api.js and
+ * display loading/error states.)
  */
 function Contact() {
+  // Placeholder for future contact logic
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState();
+  const [success, setSuccess] = useState();
+
+  // Placeholder: to use when the contact form is implemented
+  /*
+  const handleSubmit = (formData) => {
+    setSending(true);
+    sendContact(formData)
+      .then(result => {
+        setSuccess("Message sent!");
+        setError(undefined);
+      })
+      .catch(e => {
+        setError(e.message || "Failed to send message.");
+        setSuccess(undefined);
+      })
+      .finally(() => setSending(false));
+  };
+  */
+
   return (
     <section className="content contact" style={{minHeight: '50vh', padding: '2.5rem 0', maxWidth: 680, margin: '0 auto'}}>
       <h2 className="title" style={{fontSize: '2rem'}}>Contact</h2>
@@ -12,6 +38,9 @@ function Contact() {
         Want to get in touch? Fill out the form below or email me directly at <a href="mailto:youremail@mail.com" style={{color:'var(--text-secondary)', textDecoration:'underline'}}>youremail@mail.com</a>.
       </p>
       <div style={{background: 'var(--bg-secondary)', borderRadius: 8, padding: '2rem 1.5rem', boxShadow: '0 1px 8px rgba(0,0,0,0.03)'}}>
+        {sending && <div style={{color: 'var(--text-secondary)', marginBottom: '1rem'}}>Sending message&hellip;</div>}
+        {error && <div style={{color: '#c00', marginBottom: '1rem'}}>{error}</div>}
+        {success && <div style={{color: '#090', marginBottom: '1rem'}}>{success}</div>}
         <span style={{color: 'var(--text-primary)', fontWeight: 600}}>
           (Contact form coming soon. Direct email is currently best.)
         </span>
