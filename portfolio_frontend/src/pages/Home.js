@@ -4,6 +4,8 @@ import { useSectionConfig } from '../SectionConfigContext';
 import AnimatedIntro from '../components/AnimatedIntro';
 import FeaturedProjectsSlider from '../components/FeaturedProjectsSlider';
 import SocialIconsBar from '../components/SocialIconsBar';
+import About from '../components/About';
+import SkillsSidebar from '../components/SkillsSidebar';
 import { fetchProjects } from '../api/api';
 import { motion } from "framer-motion";
 
@@ -49,61 +51,7 @@ function Home(props) {
     { name: 'Python', icon: '🐍', level: 78, color: "#306998" }
   ];
 
-  // Sidebar skills - for unique progress bar display, convert to sidebar with micro-interaction
-  function SkillsSidebar({ skills }) {
-    const [animated, setAnimated] = useState(false);
-    useEffect(() => {
-      setTimeout(() => setAnimated(true), 700);
-    }, []);
-    return (
-      <aside className="skills-sidebar glass-card" tabIndex={-1}>
-        <h3 className="subtitle" style={{
-          textAlign: "center",
-          fontWeight: 700,
-          fontSize: "1.23rem",
-          color: "var(--accent2)", marginBottom: 10
-        }}>
-          Skills &amp; Tools
-        </h3>
-        <div>
-          {skills.map((s, idx) => (
-            <div
-              className="skill-progress"
-              data-animated={animated}
-              key={s.name + idx}
-              style={{ marginBottom: 22 }}
-            >
-              <div className="skill-label-bar">
-                <span style={{
-                  color: s.color || "var(--accent)", fontSize: 21, display: "flex"
-                }}>{typeof s.icon === "string" ? <span>{s.icon}</span> : s.icon}</span>
-                <span>{s.name}</span>
-                <span
-                  className="progress-tip"
-                  style={{ left: 'auto', right: 0, color: s.color || "var(--accent)" }}
-                >
-                  {animated ? `${s.level}%` : ""}
-                </span>
-              </div>
-              <div className="progress-track" style={{ background: "var(--progress-track)", borderRadius: 9 }}>
-                <div
-                  className="progress-bar"
-                  style={{
-                    background: "linear-gradient(90deg, #00e0ff 0%, #4f46e5 70%)",
-                    width: animated ? `${s.level}%` : 0,
-                    transition: "width 1.1s cubic-bezier(.4,.19,.49,1.08), background 0.4s",
-                    borderRadius: 9,
-                    boxShadow: "0 0 9px 0 #00e0ff44"
-                  }}
-                  tabIndex={0}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </aside>
-    );
-  }
+  // Sidebar skills - for unique progress bar display, use imported modular SkillsSidebar.
 
   // Projects
   const [projects, setProjects] = useState([]);
@@ -147,104 +95,23 @@ function Home(props) {
     >
       {/* Two-column glass grid: left main, right sidebar */}
       <div className="home-glass-grid">
-        {/* Main column */}
+        {/* Main column (About, CTA, Social, Projects) */}
         <div className="main-col">
-          <motion.div
-            className="glowing-avatar-wrap"
-            variants={fadeVariant}
-            style={{
-              marginBottom: 0,
-            }}
-          >
-            <span className="glowing-avatar" tabIndex={0} aria-label="Profile photo">
-              <img src={avatarUrl} alt={avatarAlt} />
-              {/* SVG glow ring effect */}
-              <svg width="148" height="148" viewBox="0 0 148 148" style={{ position: "absolute", top: "-18px", left: "-18px", pointerEvents: "none" }}>
-                <defs>
-                  <radialGradient id="glowGrad" cx="50%" cy="50%" r="85%">
-                    <stop offset="0%" stopColor="#00e0ff" stopOpacity="0.30" />
-                    <stop offset="70%" stopColor="#4f46e5" stopOpacity="0.19" />
-                    <stop offset="100%" stopColor="#1b376b" stopOpacity="0"/>
-                  </radialGradient>
-                </defs>
-                <circle cx="74" cy="74" r="68"
-                  fill="none" stroke="url(#glowGrad)" strokeWidth="7.3" />
-              </svg>
-            </span>
-          </motion.div>
-          <motion.div className="glass-card" variants={fadeVariant} style={{
-            margin: "0 auto 2.2rem auto",
-            padding: "2.0rem 2.05rem 2.24rem 2.05rem",
-            maxWidth: 600,
-            textAlign: "center",
-            background: "var(--glass-bg,rgba(21,28,54,0.70))",
-            boxShadow: "0 6px 48px 0 rgba(49,84,188,0.13)",
-            overflow: "visible"
-          }}>
-            <AnimatedIntro
-              text={title}
-              delay={33}
-              style={{
-                fontSize: "2.49rem",
-                fontWeight: 900,
-                marginBottom: 8,
-                lineHeight: 1.25,
-                letterSpacing: ".01em"
-              }}
-            />
-            <motion.p
-              className="subtitle"
-              style={{
-                maxWidth: 450,
-                margin: '0.7rem auto 1.38rem auto',
-                fontSize: 19,
-                color: "var(--text-secondary)",
-                opacity: 0.91,
-                fontWeight: 500
-              }}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.17, duration: 0.59, type: "tween" }}
-            >
-              {subtitle}
-            </motion.p>
-            {media && media.src && (
-              <motion.img
-                src={media.src}
-                alt={media.alt || 'section visual'}
-                style={
-                  media.style || {
-                    maxWidth: 320,
-                    display: 'block',
-                    margin: '1.1rem auto 1.7rem auto',
-                    borderRadius: 11,
-                  }
-                }
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.30, duration: 0.6, type: "tween" }}
-              />
-            )}
-            <motion.a
-              className="btn btn-large cta-glow"
-              href="/projects"
-              style={{ margin: "0.6rem 0 0.18rem 0", display: "inline-block" }}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.17, duration: 0.45 }}
-            >
-              {ctaLabel}
-            </motion.a>
-            {/* Social icons bar under CTA with cool hover anim */}
-            <motion.div
-              style={{ marginTop: 26 }}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.37 }}
-            >
-              <SocialIconsBar />
-            </motion.div>
-          </motion.div>
+          <About
+            avatar={{ src: avatarUrl, alt: avatarAlt }}
+            title={title}
+            subtitle={subtitle}
+            ctas={[
+              { label: ctaLabel, href: "/projects" },
+              { label: "Contact Me", href: "/contact" }
+            ]}
+            socials={undefined}
+            bioLines={[
+              "🌟 Experienced in React, Node.js, and cloud.",
+              "💡 Passionate about UI animation, APIs, and scalable software.",
+              "🚀 Ready to build your next project!"
+            ]}
+          />
           {/* Featured project highlights slider */}
           <motion.div
             className="home-feature-projects glass-card"
@@ -274,7 +141,7 @@ function Home(props) {
             )}
           </motion.div>
         </div>
-        {/* Sidebar skills progress */}
+        {/* Sidebar Skills with animated bars */}
         <div className="sidebar-col">
           <SkillsSidebar skills={skills} />
         </div>

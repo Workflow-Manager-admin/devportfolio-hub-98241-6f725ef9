@@ -110,16 +110,48 @@ function ContactForm({
 
   return (
     <div
-      className={`contact-form-container${className ? " " + className : ""}`}
-      style={{ ...layoutStyles.wrapper, boxShadow: "0 1px 10px rgba(0,0,0,0.04)", background: "var(--bg-secondary)", borderRadius: 9, maxWidth: 430, margin: "0 auto" }}
+      className={`contact-form-container glass-card${className ? " " + className : ""}`}
+      style={{
+        ...layoutStyles.wrapper,
+        maxWidth: 470,
+        margin: "0 auto",
+        background: "var(--glass-bg)",
+        border: "1.3px solid var(--glass-border)",
+        borderRadius: "1.33rem",
+        boxShadow: "0 6px 32px 0 rgba(41,75,144,0.13), 0 1.5px 11px rgba(0,16,44,0.09)",
+        position: "relative",
+        padding: "2.1rem 1.9rem 2.2rem 1.9rem",
+        zIndex: 12
+      }}
     >
       {sectionTitle && (
-        <h3 style={{ textAlign: "center", color: "var(--text-secondary)", marginBottom: "1.2rem" }}>{sectionTitle}</h3>
+        <h3 style={{ textAlign: "center", color: "var(--text-secondary)", marginBottom: "1.2rem", letterSpacing: ".003em", fontSize: "1.15rem" }}>{sectionTitle}</h3>
       )}
 
-      {status.type === "success" && <div className="contact-success">{status.message}</div>}
-      {status.type === "error" && <div className="contact-error">{status.message}</div>}
-      {sending && <div className="contact-sending">Sending message&hellip;</div>}
+      {status.type === "success" && <div className="contact-success" style={{
+        borderRadius: 8,
+        color: "#23e0cc",
+        background: "rgba(55,103,116,0.11)",
+        textAlign: "center",
+        padding: "0.67rem 0.22rem",
+        margin: "0 0 1.1rem 0",
+        fontWeight: 600
+      }}>{status.message}</div>}
+      {status.type === "error" && <div className="contact-error" style={{
+        borderRadius: 8,
+        color: "#ff496a",
+        background: "rgba(103,45,77,0.10)",
+        textAlign: "center",
+        padding: "0.67rem 0.22rem",
+        margin: "0 0 1.1rem 0",
+        fontWeight: 600
+      }}>{status.message}</div>}
+      {sending && <div className="contact-sending" style={{
+        color: "var(--accent)",
+        opacity: .94,
+        textAlign: "center",
+        marginBottom: 8
+      }}>Sending message&hellip;</div>}
       <form
         onSubmit={handleSubmit}
         noValidate
@@ -127,7 +159,7 @@ function ContactForm({
         aria-label="Contact form"
         autoComplete="off"
       >
-        <div style={{ marginBottom: "1.15rem" }}>
+        <div style={{ marginBottom: "1.18rem", position:"relative" }}>
           <label htmlFor="cf-name" style={{ fontWeight: 500, color: "var(--text-secondary)" }}>
             Name
           </label>
@@ -141,29 +173,33 @@ function ContactForm({
             onChange={handleChange}
             onBlur={handleBlur}
             disabled={sending}
+            className="neon-glow-input"
             style={{
               width: "100%",
               padding: "0.66rem",
               marginTop: 3,
-              borderRadius: 6,
-              border: "1px solid var(--border-color)",
-              background: "var(--bg-primary)",
-              color: "var(--text-primary)",
-              fontSize: "1rem",
-              outline: errors.name && touched.name ? "1.5px solid #e53c3c" : "none",
-              transition: "outline .22s",
+              borderRadius: 7,
+              border: "1.2px solid var(--border-color)",
+              background: "rgba(29,34,60,0.86)",
+              color: "var(--text-main)",
+              fontSize: "1.01rem",
+              outline: errors.name && touched.name ? "1.66px solid #e53c3c" : "none",
+              boxShadow: errors.name && touched.name
+                ? "0 0 8px #ff496a33"
+                : "0 0 10px 0 #00e0ff41",
+              transition: "outline .22s, box-shadow .21s"
             }}
             aria-required="true"
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "name-error" : undefined}
           />
           {errors.name && touched.name && (
-            <div id="name-error" style={{ color: "#c00", marginTop: "0.14rem", fontSize: "0.98rem" }}>
+            <div id="name-error" style={{ color: "#ff496a", marginTop: "0.13rem", fontSize: "0.98rem", fontWeight: 500 }}>
               {errors.name}
             </div>
           )}
         </div>
-        <div style={{ marginBottom: "1.15rem" }}>
+        <div style={{ marginBottom: "1.15rem", position:"relative" }}>
           <label htmlFor="cf-email" style={{ fontWeight: 500, color: "var(--text-secondary)" }}>
             Email
           </label>
@@ -177,29 +213,33 @@ function ContactForm({
             onChange={handleChange}
             onBlur={handleBlur}
             disabled={sending}
+            className="neon-glow-input"
             style={{
               width: "100%",
               padding: "0.66rem",
               marginTop: 3,
-              borderRadius: 6,
-              border: "1px solid var(--border-color)",
-              background: "var(--bg-primary)",
-              color: "var(--text-primary)",
-              fontSize: "1rem",
-              outline: errors.email && touched.email ? "1.5px solid #e53c3c" : "none",
-              transition: "outline .22s",
+              borderRadius: 7,
+              border: "1.2px solid var(--border-color)",
+              background: "rgba(29,34,60,0.86)",
+              color: "var(--text-main)",
+              fontSize: "1.01rem",
+              outline: errors.email && touched.email ? "1.66px solid #e53c3c" : "none",
+              boxShadow: errors.email && touched.email
+                ? "0 0 8px #ff496a33"
+                : "0 0 10px 0 #00e0ff41",
+              transition: "outline .22s, box-shadow .21s"
             }}
             aria-required="true"
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "email-error" : undefined}
           />
           {errors.email && touched.email && (
-            <div id="email-error" style={{ color: "#c00", marginTop: "0.14rem", fontSize: "0.98rem" }}>
+            <div id="email-error" style={{ color: "#ff496a", marginTop: "0.13rem", fontSize: "0.98rem", fontWeight: 500 }}>
               {errors.email}
             </div>
           )}
         </div>
-        <div style={{ marginBottom: "1.25rem" }}>
+        <div style={{ marginBottom: "1.29rem", position:"relative" }}>
           <label htmlFor="cf-message" style={{ fontWeight: 500, color: "var(--text-secondary)" }}>
             Message
           </label>
@@ -212,26 +252,30 @@ function ContactForm({
             onBlur={handleBlur}
             disabled={sending}
             rows={5}
+            className="neon-glow-input"
             style={{
               width: "100%",
-              padding: "0.68rem",
-              minHeight: 120,
+              padding: "0.69rem",
+              minHeight: 115,
               marginTop: 3,
-              borderRadius: 8,
-              border: "1px solid var(--border-color)",
-              background: "var(--bg-primary)",
-              color: "var(--text-primary)",
-              fontSize: "1rem",
+              borderRadius: 10,
+              border: "1.2px solid var(--border-color)",
+              background: "rgba(29,34,60,0.86)",
+              color: "var(--text-main)",
+              fontSize: "1.08rem",
               resize: "vertical",
-              outline: errors.message && touched.message ? "1.5px solid #e53c3c" : "none",
-              transition: "outline .22s",
+              outline: errors.message && touched.message ? "1.66px solid #e53c3c" : "none",
+              boxShadow: errors.message && touched.message
+                ? "0 0 8px #ff496a33"
+                : "0 0 11px 0 #00e0ff41",
+              transition: "outline .22s, box-shadow .21s"
             }}
             aria-required="true"
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? "message-error" : undefined}
           />
           {errors.message && touched.message && (
-            <div id="message-error" style={{ color: "#c00", marginTop: "0.14rem", fontSize: "0.98rem" }}>
+            <div id="message-error" style={{ color: "#ff496a", marginTop: "0.13rem", fontSize: "0.98rem", fontWeight: 500 }}>
               {errors.message}
             </div>
           )}
@@ -239,20 +283,41 @@ function ContactForm({
         {extraFields}
         <button
           type="submit"
-          className="btn btn-large"
+          className="btn btn-large cta-glow"
           disabled={sending}
           style={{
             width: "100%",
-            marginTop: 8,
-            fontWeight: 600,
-            background: "var(--button-bg)",
-            color: "var(--button-text)",
-            opacity: sending ? 0.7 : 1,
+            marginTop: 13,
+            fontWeight: 700,
+            fontSize: "1.17rem",
+            letterSpacing: ".012em",
+            background: "linear-gradient(97deg,#4f46e5 66%,#00e0ff 110%)",
+            color: "#fff",
+            boxShadow: "0 0 16px #00e0ff, 0 0 28px #4f46e5, 0 0 2px #fff",
+            opacity: sending ? 0.65 : 1,
+            animation: "cta-btn-pulse 3.3s infinite cubic-bezier(.75,.35,.38, 1.18) both alternate"
           }}
         >
           {sending ? "Sending..." : submitLabel}
         </button>
       </form>
+      <style>
+        {`
+          .neon-glow-input:focus {
+            box-shadow: 0 0 13px #00e0ff, 0 0 27px #4f46e5, 0 0 2px #fff;
+            border: 1.4px solid var(--accent);
+            outline: none !important;
+            background: rgba(21, 29, 51, 0.98);
+            color: #fff;
+          }
+          @media(max-width:640px){
+            .contact-form-container {
+              padding: 1.04rem 0.28rem 1.22rem 0.28rem !important;
+              max-width: 99vw !important;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
