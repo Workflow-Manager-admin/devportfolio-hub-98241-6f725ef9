@@ -36,7 +36,7 @@ function Projects() {
       {loading && <div style={{color: 'var(--text-secondary)', margin: "2.5rem 0"}}>Loading projects&hellip;</div>}
       {error && <div style={{color: '#c00', margin: '1rem 0'}}>{error}</div>}
       {!loading && !error && (
-      <div style={{display: 'flex', flexWrap: 'wrap', gap: '2.2rem', justifyContent: 'center'}}>
+      <div className="projects-list">
         {projects.length === 0 && (
           <span style={{color: 'var(--text-secondary)'}}>No projects to display.</span>
         )}

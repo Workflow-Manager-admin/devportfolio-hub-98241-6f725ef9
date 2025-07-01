@@ -33,14 +33,14 @@ function Contact() {
 
   return (
     <section className="content contact" style={{minHeight: '50vh', padding: '2.5rem 0', maxWidth: 680, margin: '0 auto'}}>
-      <h2 className="title" style={{fontSize: '2rem'}}>Contact</h2>
-      <p style={{fontSize: '1.08rem', color: 'var(--text-secondary)', marginBottom: '1.7rem'}}>
-        Want to get in touch? Fill out the form below or email me directly at <a href="mailto:youremail@mail.com" style={{color:'var(--text-secondary)', textDecoration:'underline'}}>youremail@mail.com</a>.
+      <h2 className="title">Contact</h2>
+      <p className="contact-info">
+        Want to get in touch? Fill out the form below or email me directly at <a href="mailto:youremail@mail.com">youremail@mail.com</a>.
       </p>
-      <div style={{background: 'var(--bg-secondary)', borderRadius: 8, padding: '2rem 1.5rem', boxShadow: '0 1px 8px rgba(0,0,0,0.03)'}}>
-        {sending && <div style={{color: 'var(--text-secondary)', marginBottom: '1rem'}}>Sending message&hellip;</div>}
-        {error && <div style={{color: '#c00', marginBottom: '1rem'}}>{error}</div>}
-        {success && <div style={{color: '#090', marginBottom: '1rem'}}>{success}</div>}
+      <div className="contact-form-container">
+        {sending && <div className="contact-sending">Sending message&hellip;</div>}
+        {error && <div className="contact-error">{error}</div>}
+        {success && <div className="contact-success">{success}</div>}
         <span style={{color: 'var(--text-primary)', fontWeight: 600}}>
           (Contact form coming soon. Direct email is currently best.)
         </span>

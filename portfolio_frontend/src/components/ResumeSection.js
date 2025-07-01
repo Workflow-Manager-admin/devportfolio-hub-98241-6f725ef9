@@ -10,10 +10,8 @@ import React from 'react';
  */
 function ResumeSection({ title, children }) {
   return (
-    <section className="resume-section" style={{marginBottom: '2.1rem'}}>
-      <h3 className="resume-section-title" style={{fontSize: '1.12rem', color: 'var(--text-secondary)', marginBottom: '.7rem', textTransform: "uppercase", letterSpacing: "0.08em"}}>
-        {title}
-      </h3>
+    <section className="resume-section">
+      <h3 className="resume-section-title">{title}</h3>
       <div className="resume-section-content">
         {children}
       </div>

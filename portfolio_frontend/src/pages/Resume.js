@@ -68,28 +68,23 @@ function Resume() {
             {data.skills.length === 0 ? (
               <div style={{color: 'var(--text-secondary)'}}>No skills listed.</div>
             ) : (
-              <ul style={{display: 'flex', flexWrap: 'wrap', gap: '.8rem', paddingLeft: 0, listStyle: 'none'}}>
+              <ul className="skills-list">
                 {data.skills.map((skill, idx) => (
-                  <li key={idx} style={{background: "var(--bg-secondary)", color: "var(--text-primary)", borderRadius: "6px", padding: ".3rem 1rem", fontSize: ".98rem", border: "1px solid var(--border-color)"}}>
+                  <li key={idx} className="skill">
                     {skill}
                   </li>
                 ))}
               </ul>
             )}
           </ResumeSection>
-          <div style={{marginTop: "2.2rem"}}>
-            <a
-              className="btn"
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                background: 'var(--button-bg)', color: 'var(--button-text)', fontWeight: 600,
-                padding: '.8rem 1.9rem', borderRadius: '5px', textDecoration: 'none'
-              }}>
-              Download PDF
-            </a>
-          </div>
+          <a
+            className="btn download-resume-btn"
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download PDF
+          </a>
         </>
       )}
     </section>
