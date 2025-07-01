@@ -2,8 +2,10 @@
  * PUBLIC_INTERFACE
  * API utility module for communicating with the backend endpoints.
  * Uses fetch to handle requests for projects, resume, and contact functionality.
- * All requests prefixed with '/api/' assume calls proxied to the backend server.
+ * All endpoints now use the deployed backend at the specified base URL.
  */
+
+const API_BASE_URL = 'https://vscode-internal-210-beta.beta01.cloud.kavia.ai:3001/api';
 
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -18,14 +20,14 @@ const handleResponse = async (response) => {
 // PUBLIC_INTERFACE
 export async function fetchProjects() {
   /** Fetches the list of projects from the backend. */
-  const res = await fetch('/api/projects');
+  const res = await fetch(`${API_BASE_URL}/projects`);
   return handleResponse(res);
 }
 
 // PUBLIC_INTERFACE
 export async function fetchResume() {
   /** Fetches the resume data from the backend. */
-  const res = await fetch('/api/resume');
+  const res = await fetch(`${API_BASE_URL}/resume`);
   return handleResponse(res);
 }
 
@@ -34,7 +36,7 @@ export async function sendContact(formData) {
   /** Sends the contact form data to backend and returns the result.
    * @param {Object} formData - { name, email, message }
    */
-  const res = await fetch('/api/contact', {
+  const res = await fetch(`${API_BASE_URL}/contact`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(formData)
@@ -45,6 +47,6 @@ export async function sendContact(formData) {
 // PUBLIC_INTERFACE
 export async function fetchProfile() {
   /** Fetches the user profile info from the backend. */
-  const res = await fetch('/api/profile');
+  const res = await fetch(`${API_BASE_URL}/profile`);
   return handleResponse(res);
 }
